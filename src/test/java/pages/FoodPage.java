@@ -1,11 +1,15 @@
 package pages;
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static pagetests.BaseTest.driver;
 
 public class FoodPage extends BasePage {
 
@@ -28,20 +32,29 @@ public class FoodPage extends BasePage {
     public WebElement saveFoodBtn;
 
     @FindBy(xpath = "//th[@scope='row' and text()='5']")
-    private WebElement newRowId;
+    public WebElement newRowId;
 
     @FindBy(xpath = "//th[@scope='row' and text()='5']/following::td[1]")
-    private WebElement newRowName;
+    public WebElement newRowName;
 
     @FindBy(xpath = "//th[@scope='row' and text()='5']/following::td[2]")
-    private WebElement newRowType;
+    public WebElement newRowType;
 
     @FindBy(xpath = "//th[@scope='row' and text()='5']/following::td[3]")
-    private WebElement newRowIsExotic;
+    public WebElement newRowIsExotic;
 
     @FindBy(xpath = "//input[@type='checkbox']")
-    private WebElement exoticCheckbox;
+    public WebElement exoticCheckbox;
 
+
+    public FoodPage() {
+        PageFactory.initElements(driver, this);
+    }
+
+    public void openFoodPage() {
+        driver.get("http://localhost:8080/food");
+        driver.manage().window().maximize();
+    }
 
     public FoodPage checkFoodPageTitleIsVisible(String title) {
         Assertions.assertEquals(title, foodPageTitle.getText(), "Некорректный заголовок 'Список товаров'");

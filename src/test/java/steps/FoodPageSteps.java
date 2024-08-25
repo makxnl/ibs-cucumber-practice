@@ -2,16 +2,11 @@ package steps;
 
 import io.cucumber.java.ru.И;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
 import pages.FoodPage;
 
-import java.util.concurrent.TimeUnit;
-
-import static pagetests.BaseTest.driver;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class FoodPageSteps extends BasePage {
 
@@ -19,11 +14,8 @@ public class FoodPageSteps extends BasePage {
 
     @И("Переход на страницу food")
     public void openFoodPage() {
-        driver.get("http://localhost:8080/food");
-        driver.manage().window().maximize();
-
+        foodPage.openFoodPage();
     }
-
 
     @И("Открыта страница {string}")
     public void checkFoodPageTitleIsVisible(String title) {
@@ -58,16 +50,18 @@ public class FoodPageSteps extends BasePage {
         foodPage.saveFoodBtn.click();
     }
 
-//    public void enableExoticCheckbox() {
-//        exoticCheckbox.click();
-//    }
-//
-//    public void checkFoodIsAdded(String id, String ruName, String ruType, String isExotic) {
-//        assertAll("Проверка отображения добавленного товара в списке товаров",
-//                () -> Assertions.assertEquals(id, newRowId.getText(), "Имя неверно"),
-//                () -> Assertions.assertEquals(ruName, newRowName.getText(), "Имя неверно"),
-//                () -> Assertions.assertEquals(ruType, newRowType.getText(), "Тип неверный"),
-//                () -> Assertions.assertEquals(isExotic, newRowIsExotic.getText(), "Неверное поле экзотический"));
-//    }
+    @И("Активировать чекбокс 'Экзотический'")
+    public void enableExoticCheckbox() {
+        foodPage.exoticCheckbox.click();
+    }
+
+    @И("Форма закрывается, товар {string} {string} {string} {string} отображается в списке")
+    public void checkFoodIsAdded(String id, String ruName, String ruType, String isExotic) {
+        assertAll("Проверка отображения добавленного товара в списке товаров",
+                () -> Assertions.assertEquals(id, foodPage.newRowId.getText(), "Имя неверно"),
+                () -> Assertions.assertEquals(ruName, foodPage.newRowName.getText(), "Имя неверно"),
+                () -> Assertions.assertEquals(ruType, foodPage.newRowType.getText(), "Тип неверный"),
+                () -> Assertions.assertEquals(isExotic, foodPage.newRowIsExotic.getText(), "Неверное поле экзотический"));
+    }
 
 }
