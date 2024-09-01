@@ -20,11 +20,10 @@ public class Hooks {
 
     public static WebDriver driver;
     private static Properties properties = new Properties();
-    private static WebDriverWait wait;
 
 
     @Before
-    public void beforeEach() throws IOException {
+    public void beforeEach() throws IOException, InterruptedException {
 
         InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
         properties.load(input);
@@ -38,6 +37,7 @@ public class Hooks {
                     "enableVideo", false));
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
                     capabilities);
+            Thread.sleep(1000);
         } else {
             System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
@@ -46,8 +46,6 @@ public class Hooks {
             driver.get("http://149.154.71.152:8080/food");
             driver.manage().window().maximize();
         }
-
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
