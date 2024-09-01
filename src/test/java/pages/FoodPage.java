@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class FoodPage extends BasePage {
 
-    @FindBy(xpath = "//div[@class='container-fluid']/h5")
+    @FindBy(xpath = "//h5[text()='Список товаров']")
     public WebElement foodPageTitle;
 
     @FindBy(xpath = "//div[@class='btn-grou mt-2 mb-2']/button")
