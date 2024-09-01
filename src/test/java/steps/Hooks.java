@@ -37,7 +37,10 @@ public class Hooks {
                     "enableVideo", false));
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
                     capabilities);
-            Thread.sleep(5000);
+            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.get("http://149.154.71.152:8080/food");
+            driver.manage().window().maximize();
         } else {
             System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
