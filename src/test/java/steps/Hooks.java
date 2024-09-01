@@ -33,7 +33,7 @@ public class Hooks {
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
                     capabilities);
         } else {
-            System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver-win64/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
