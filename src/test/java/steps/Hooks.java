@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +31,7 @@ public class Hooks {
             capabilities.setVersion("109.0");
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
-            driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
                     capabilities);
         } else {
             System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver-win64/chromedriver.exe");
