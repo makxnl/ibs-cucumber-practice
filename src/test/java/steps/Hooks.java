@@ -45,7 +45,9 @@ public class Hooks {
 
     @After
     public void afterEach() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }
