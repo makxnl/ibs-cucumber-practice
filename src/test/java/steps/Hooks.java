@@ -37,7 +37,7 @@ public class Hooks {
                     "enableVideo", false));
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
                     capabilities);
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } else {
             System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
