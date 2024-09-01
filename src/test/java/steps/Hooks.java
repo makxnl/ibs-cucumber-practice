@@ -26,8 +26,8 @@ public class Hooks {
 
         if (properties.getProperty("execution.mode").equals("remote")) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(properties.getProperty("browser"));
-            capabilities.setVersion("109.0");
+            capabilities.setBrowserName(properties.getProperty("browser.type"));
+            capabilities.setVersion(properties.getProperty("browser.version"));
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
