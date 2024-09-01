@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -28,8 +29,9 @@ public class Hooks {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(properties.getProperty("browser.type"));
             capabilities.setVersion(properties.getProperty("browser.version"));
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", false);
+            capabilities.setCapability("selenoid:options", Map.of(
+                    "enableVNC", true,
+                    "enableVideo", false));
             driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
                     capabilities);
         } else {
