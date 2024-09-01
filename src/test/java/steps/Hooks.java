@@ -23,7 +23,7 @@ public class Hooks {
 
 
     @Before
-    public void beforeEach() throws IOException, InterruptedException {
+    public void beforeEach() throws IOException {
 
         InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
         properties.load(input);
