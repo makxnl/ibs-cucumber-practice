@@ -7,6 +7,7 @@ public class FoodPageSteps {
 
     FoodPage foodPage = new FoodPage();
 
+
     @И("Открыта страница {string}")
     public void checkFoodPageTitleIsVisible(String title) {
         foodPage.checkFoodPageTitleIsVisible(title);
@@ -26,7 +27,6 @@ public class FoodPageSteps {
     public void fillNameField(String value) {
         foodPage.fillNameField(value);
     }
-
 
     @И("Выбрать в выпадающем списке тип {string}")
     public void selectVegetableFromDropdownList(String foodType) {

@@ -11,10 +11,10 @@ public class Hooks {
 
     public static WebDriver driver;
 
+
     @Before
     public void beforeEach(){
-        System.setProperty("webdriver.chrome.driver", "C:\\ideaProject"
-                + "\\ibsTest1\\src\\test\\resources\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver-win64/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
