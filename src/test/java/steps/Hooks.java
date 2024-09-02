@@ -38,13 +38,15 @@ public class Hooks {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.get("http://149.154.71.152:8080/food");
             driver.manage().window().maximize();
-        } else {
-            System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
+        } else if (properties.getProperty("execution.mode").equals("local")) {
+                        System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.get("http://149.154.71.152:8080/food");
             driver.manage().window().maximize();
+        } else {
+            System.out.println("unknown mode");
         }
 
     }
