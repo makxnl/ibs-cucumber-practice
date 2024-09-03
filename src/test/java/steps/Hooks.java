@@ -34,18 +34,35 @@ public class Hooks {
         );
 
         if (properties.getProperty("execution.mode").equals("remote")) {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(properties.getProperty("browser.type"));
-            capabilities.setVersion(properties.getProperty("browser.version"));
-            capabilities.setCapability("selenoid:options", Map.of(
-                    "enableVNC", true,
-                    "enableVideo", false));
-            driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
-                    capabilities);
-            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            driver.get("http://149.154.71.152:8080/food");
-            driver.manage().window().maximize();
+            if (properties.getProperty("browser.type").equals("chrome")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("chrome");
+                capabilities.setVersion(properties.getProperty("browser.version"));
+                capabilities.setCapability("selenoid:options", Map.of(
+                        "enableVNC", true,
+                        "enableVideo", false));
+                driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
+                        capabilities);
+                driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.get("http://149.154.71.152:8080/food");
+                driver.manage().window().maximize();
+            } else if (properties.getProperty("browser.type").equals("firefox")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("firefox");
+                capabilities.setVersion(properties.getProperty("browser.version"));
+                capabilities.setCapability("selenoid:options", Map.of(
+                        "enableVNC", true,
+                        "enableVideo", false));
+                driver = new RemoteWebDriver(URI.create(properties.getProperty("selenoid.url")).toURL(),
+                        capabilities);
+                driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.get("http://149.154.71.152:8080/food");
+                driver.manage().window().maximize();
+            } else {
+                System.out.println("Wrong browser name");
+            }
         } else if (properties.getProperty("execution.mode").equals("local")) {
                         System.setProperty("webdriver.chrome.driver",  properties.getProperty("local.driver.path"));
             driver = new ChromeDriver();
@@ -54,7 +71,7 @@ public class Hooks {
             driver.get("http://149.154.71.152:8080/food");
             driver.manage().window().maximize();
         } else {
-            System.out.println("unknown mode");
+            System.out.println("Unknown mode");
         }
 
     }
