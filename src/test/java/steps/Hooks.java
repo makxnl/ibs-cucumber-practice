@@ -25,6 +25,14 @@ public class Hooks {
         InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
         properties.load(input);
 
+        properties.forEach((key, value) -> System.getProperties()
+                .forEach((custom_key, custom_value) -> {
+                    if (custom_key.toString().equals(key.toString())) {
+                        properties.setProperty(key.toString(), custom_value.toString());
+                    }
+                })
+        );
+
         if (properties.getProperty("execution.mode").equals("remote")) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(properties.getProperty("browser.type"));
