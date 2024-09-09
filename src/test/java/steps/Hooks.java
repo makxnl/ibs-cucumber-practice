@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Hooks {
 
     public static WebDriver driver;
-    private static Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
 
     @Before
